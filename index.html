@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kitty's Birthday Storybook</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      scroll-snap-type: x mandatory;
+      height: 100vh;
+      overflow-x: auto;
+      overflow-y: hidden;
+      display: flex;
+      flex-direction: row;
+      background: linear-gradient(to right, #ffecd2 0%, #fcb69f 100%);
+      color: #2c2c54;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      position: relative;
+    }
+
+    section {
+      scroll-snap-align: start;
+      min-width: 100vw;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 4rem 2rem;
+      position: relative;
+      text-align: center;
+      z-index: 1;
+      perspective: 1000px;
+      animation: fadeIn 1.5s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateX(50px); }
+      100% { opacity: 1; transform: translateX(0); }
+    }
+
+    .glass {
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 20px;
+      padding: 2rem;
+      max-width: 800px;
+      width: 90%;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+      transform: rotateY(5deg);
+      transition: transform 0.6s ease, background 0.6s ease;
+    }
+
+    section:hover .glass {
+      transform: rotateY(0);
+      background: rgba(255, 255, 255, 0.8);
+    }
+
+    h2 {
+      font-size: 2.8rem;
+      color: #c44569;
+      margin-bottom: 1rem;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+    }
+
+    p {
+      font-size: 1.25rem;
+      color: #333;
+      line-height: 1.8;
+    }
+
+    .float {
+      position: fixed;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      animation: float 10s infinite ease-in-out;
+      z-index: 0;
+      opacity: 0;
+    }
+
+    .heart { background: radial-gradient(circle, #ff4d6d, #ff85a2); }
+    .balloon { background: radial-gradient(circle, #6ec1e4, #b4e0fe); }
+
+    .float:nth-child(1) { left: 5%; animation-delay: 0s; top: 90%; }
+    .float:nth-child(2) { left: 20%; animation-delay: 1s; top: 100%; }
+    .float:nth-child(3) { left: 40%; animation-delay: 2s; top: 95%; }
+    .float:nth-child(4) { left: 60%; animation-delay: 3s; top: 92%; }
+    .float:nth-child(5) { left: 75%; animation-delay: 4s; top: 98%; }
+    .float:nth-child(6) { left: 90%; animation-delay: 5s; top: 100%; }
+
+    @keyframes float {
+      0% { transform: translateY(0) scale(1); opacity: 0; }
+      25% { opacity: 1; }
+      50% { transform: translateY(-50vh) scale(1.2); }
+      100% { transform: translateY(-120vh) scale(0.8); opacity: 0; }
+    }
+
+    .confetti {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      background-image: url('data:image/svg+xml,%3Csvg width="10" height="10" xmlns="http://www.w3.org/2000/svg"%3E%3Ccircle cx="5" cy="5" r="5" fill="%23ff85a2"/%3E%3C/svg%3E');
+      background-size: 10px 10px;
+      animation: sparkle 20s linear infinite;
+      z-index: 0;
+      opacity: 0.2;
+    }
+
+    @keyframes sparkle {
+      0% { background-position: 0 0; }
+      100% { background-position: 1000px 1000px; }
+    }
+
+    @media (max-width: 768px) {
+      html, body {
+        flex-direction: column;
+        scroll-snap-type: y mandatory;
+        overflow-y: scroll;
+        overflow-x: hidden;
+      }
+      section {
+        min-width: 100vw;
+        min-height: 100vh;
+      }
+      h2 {
+        font-size: 2rem;
+      }
+      p {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Sparkle and Confetti -->
+  <div class="confetti"></div>
+
+  <!-- Floating Decorations -->
+  <div class="float heart"></div>
+  <div class="float balloon"></div>
+  <div class="float heart"></div>
+  <div class="float balloon"></div>
+  <div class="float heart"></div>
+  <div class="float balloon"></div>
+
+  <!-- Title Page -->
+  <section>
+    <div class="glass" style="animation: titleGlow 4s ease-in-out infinite alternate;">
+      <h2 style="font-size: 3.5rem; color: #ff6b81; animation: popIn 2s ease forwards;">Happy Birthday, Kitty! 🐾</h2>
+      <p style="font-size: 1.5rem; margin-top: 1.5rem; color: #444; animation: fadeIn 3s ease forwards;">
+        A little storybook for the one who's been there in every chapter of my life.
+      </p>
+      <p style="font-size: 1.2rem; margin-top: 2rem; color: #777; animation: fadeIn 4s ease forwards;">
+        With love, from someone who never runs out of reasons to smile because of you 💙
+      </p>
+    </div>
+  </section>
+  <style>
+    @keyframes titleGlow {
+      from { box-shadow: 0 0 30px #ff9aa2; }
+      to { box-shadow: 0 0 60px #fcb69f; }
+    }
+    @keyframes popIn {
+      0% { transform: scale(0.8); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+  </style>
+
+  
+  <section>
+    <div class="glass">
+      <h2>Chapter 1: When We Almost Sank the Ship</h2>
+      <p>In the library, it was just us — staring at each other like two captains deciding the fate of a cr ship.<br>No big moment, no epic music… just a quiet choice that somehow defined everything after.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="glass">
+      <h2>Chapter 2: From Pisti to Kitty</h2>
+      <p>First it was Pisti. Then Choti.<br>But then you said, “Kitty… this one’s so cute.”<br>And just like that — it stuck. Maybe because you love cats. Maybe because it fit you perfectly.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="glass">
+      <h2>Chapter 3: The Lab and Her Little Things</h2>
+      <p>Between wires and worksheets, you’d suddenly do the smallest, cutest thing —<br>A random look, a line, a reaction — and everything felt light. Who knew lab work could make me smile?</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="glass">
+      <h2>Chapter 4: What I Adore About You</h2>
+      <p>It's not just your smile or your words — it's your simplicity.<br>The way you’re soft, and shy, and still handle life like it never gets to you.<br>I don’t just like that — I adore it.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="glass">
+      <h2>Chapter 5: Not Just Today</h2>
+      <p>This day is special, yes — but the truth is...<br>Every day with you feels like something worth celebrating.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="glass">
+      <h2>Chapter 6: My Wish for You</h2>
+      <p>I hope every single day ahead is filled with that same smile you’ve always given me.<br>A life full of soft moments, kind people, and peace in your heart — just like the peace you’ve given mine.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="glass">
+      <h2>Final Chapter: Happy Birthday Kitty 🎂</h2>
+      <p>From beginning to end — you’ve filled life with magic.<br>This story isn’t over… it’s just our favorite chapter yet.<br><br>Happy Birthday! 💙</p>
+    </div>
+  </section>
+</body>
+</html>
